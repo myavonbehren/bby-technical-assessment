@@ -7,6 +7,8 @@ export const GlobalStyles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.background.primary,
+    paddingHorizontal:16,
+    paddingVertical: 5
   },
 
   // Header Styles
