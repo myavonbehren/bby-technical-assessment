@@ -1,5 +1,3 @@
-// data/mockServices.js
-
 export const mockServicesData = {
     hair: {
       title: "Hair",
