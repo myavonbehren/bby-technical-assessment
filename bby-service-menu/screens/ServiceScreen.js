@@ -1,5 +1,5 @@
 // ServiceScreen.js
-import { View } from "react-native";
+import { View, RefreshControl } from "react-native";
 import { useState, useEffect } from "react";
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import { mockServicesData } from "../data/mockServices";
@@ -9,12 +9,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ServiceScreen = () => {
   const [expandedSections, setExpandedSections] = useState({
-    hair: true,
+    hair: false,
     nails: false,
     facial: false,
   });
   const [servicesData, setServicesData] = useState(mockServicesData);
   const [sectionOrder, setSectionOrder] = useState(Object.keys(mockServicesData));
+  const [refreshing, setRefreshing] = useState(false);
 
   // Load saved order on component mount
   useEffect(() => {
@@ -78,6 +79,24 @@ const ServiceScreen = () => {
     saveSectionOrder(newSectionOrder);
   };
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    try {
+      // Simulate loading time
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Reload data from storage
+      await loadServicesOrder();
+      
+      // You could also fetch fresh data from an API here
+      console.log('Data refreshed successfully');
+    } catch (error) {
+      console.log('Error refreshing data:', error);
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
   // Prepare data for section-level dragging
   const sectionData = sectionOrder.map(key => ({
     key,
@@ -119,6 +138,15 @@ const ServiceScreen = () => {
               duration: 300,
             },
           }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor="#6B7280"
+              colors={["#6B7280"]}
+              progressBackgroundColor="#F9FAFB"
+            />
+          }
         />
       </View>
     );
