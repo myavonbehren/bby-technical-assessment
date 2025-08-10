@@ -1,33 +1,36 @@
-// ServiceScreen.js
-import { FlatList } from "react-native";
-import { getAllServices } from "../data/mockServices";
-import ServiceItem from "../components/ServiceMenu/ServiceItem";
+import { ScrollView } from "react-native";
+import { useState } from "react";
+import { mockServicesData } from "../data/mockServices";
+import ServiceSection from "../components/ServiceMenu/ServiceSection";
 import { GlobalStyles } from "../constants/Styles";
 
 const ServiceScreen = () => {
-    const mockServices = getAllServices();
+  const [expandedSections, setExpandedSections] = useState({
+    hair: true,
+    nails: false,
+    facial: false,
+  });
 
-    const renderServiceItem = ({ item, index }) => (
-        <ServiceItem 
-            service={item} 
-            isLast={index === mockServices.length - 1}
-            onPress={() => {}} 
-            onMorePress={() => {}} 
-        />
-    );
+  const toggleSection = (sectionKey) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey]
+    }));
+  };
 
-    return (
-        <FlatList
-            style={GlobalStyles.screenContainer}
-            data={mockServices}
-            renderItem={renderServiceItem}
-            keyExtractor={(item) => item.id.toString()}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-                gap: 10,
-                paddingBottom: 20,
-            }}
+  return (
+    <ScrollView style={GlobalStyles.listContainer}>
+      {Object.entries(mockServicesData).map(([key, category]) => (
+        <ServiceSection
+          key={key}
+          title={category.title}
+          services={category.services}
+          isExpanded={expandedSections[key]}
+          onToggle={() => toggleSection(key)}
         />
-    )
-}
+      ))}
+    </ScrollView>
+  );
+};
+
 export default ServiceScreen;
