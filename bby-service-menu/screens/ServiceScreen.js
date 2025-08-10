@@ -22,6 +22,7 @@ const ServiceScreen = () => {
     loadServicesOrder();
   }, []);
 
+  // Load services order from AsyncStorage (local storage, mock data)
   const loadServicesOrder = async () => {
     try {
       const savedOrder = await AsyncStorage.getItem('servicesOrder');
@@ -38,6 +39,7 @@ const ServiceScreen = () => {
     }
   };
 
+  // Save services order to AsyncStorage (allows for persistence across sessions)
   const saveServicesOrder = async (newOrder) => {
     try {
       await AsyncStorage.setItem('servicesOrder', JSON.stringify(newOrder));
@@ -46,6 +48,7 @@ const ServiceScreen = () => {
     }
   };
 
+  // Save section order to AsyncStorage (allows for persistence across sessions)
   const saveSectionOrder = async (newSectionOrder) => {
     try {
       await AsyncStorage.setItem('sectionOrder', JSON.stringify(newSectionOrder));
@@ -54,6 +57,7 @@ const ServiceScreen = () => {
     }
   };
 
+  // Toggle section expansion state (expand/collapse)
   const toggleSection = (sectionKey) => {
     setExpandedSections(prev => ({
       ...prev,
@@ -61,6 +65,7 @@ const ServiceScreen = () => {
     }));
   };
 
+  // Handle service reordering (drag and drop)
   const handleReorderServices = (sectionKey, reorderedServices) => {
     const newData = {
       ...servicesData,
@@ -73,12 +78,14 @@ const ServiceScreen = () => {
     saveServicesOrder(newData);
   };
 
+  // Handle section reordering (drag and drop)
   const handleReorderSections = ({ data }) => {
     const newSectionOrder = data.map(item => item.key);
     setSectionOrder(newSectionOrder);
     saveSectionOrder(newSectionOrder);
   };
 
+  // Handle refresh (simulated)
   const onRefresh = async () => {
     setRefreshing(true);
     try {
@@ -103,6 +110,7 @@ const ServiceScreen = () => {
     category: servicesData[key]
   }));
 
+  // Render each section (services)
   const renderSection = ({ item, drag, isActive }) => {
     const { key, category } = item;
     

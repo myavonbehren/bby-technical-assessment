@@ -17,13 +17,13 @@ const ServiceSection = ({
   onLongPress,
   isDragging = false,
   isDisabled = false,
-  userPermissions = { canEdit: true, canDelete: true, canReorder: true },
+  userPermissions = { canEdit: true, canDelete: true, canReorder: true }, // User permissions for the section (mock implementation)
   sectionId = null,
-  maxItems = 50, // Prevent performance issues with large lists
+  maxItems = 50, // Prevent performance issues with large lists (max 50 services per section)
   onServicePress,
   onServiceMorePress
 }) => {
-  // Memoized computed values for performance
+  // Memoized computed values for performance (re-renders only when necessary)
   const containerStyles = useMemo(() => [
     GlobalStyles.sectionContainer,
     isDragging && { opacity: 0.8, backgroundColor: Colors.background.secondary },
@@ -41,7 +41,7 @@ const ServiceSection = ({
       .slice(0, maxItems); // Limit to prevent performance issues
   }, [services, maxItems]);
 
-  // Memoized render function for better performance
+  // Memoized render function for better performance (re-renders only when necessary)
   const renderServiceItem = useCallback(({ item, index, drag, isActive }) => {
     if (!item || !item.id) return null; // Skip invalid items
     

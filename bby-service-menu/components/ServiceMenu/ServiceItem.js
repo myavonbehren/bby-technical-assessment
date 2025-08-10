@@ -14,7 +14,7 @@ const ServiceItem = ({
   isDragging = false,
   isSelected = false,
   isDisabled = false,
-  userPermissions = { canEdit: true, canDelete: true }
+  userPermissions = { canEdit: true, canDelete: true } // User permissions for the service (mock implementation)
 }) => {
   // Destructure with defaults to handle missing data gracefully
   const { 
@@ -28,7 +28,7 @@ const ServiceItem = ({
     createdBy = null
   } = service || {};
 
-  // Memoized computed values for performance
+  // Memoized computed values for performance (re-renders only when necessary)
   const itemStyles = useMemo(() => [
     GlobalStyles.serviceItem,
     isLast && GlobalStyles.serviceItemLast,
