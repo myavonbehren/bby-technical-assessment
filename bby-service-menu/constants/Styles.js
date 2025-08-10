@@ -86,8 +86,6 @@ export const GlobalStyles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
     backgroundColor: Colors.background.primary,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: Colors.border.ultraLight,
     borderRadius: 10,
     paddingHorizontal: 10,
     shadowColor: Colors.shadow,
