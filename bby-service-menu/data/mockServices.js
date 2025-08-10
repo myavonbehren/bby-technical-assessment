@@ -1,3 +1,7 @@
+// Mock data for sections and services
+// Sections are hair, nails, facial, waxing
+// Services are Blowout, Cut & Style, Color Touch-up, etc.
+
 export const mockServicesData = {
     hair: {
       title: "Hair",
