@@ -7,7 +7,7 @@ export const GlobalStyles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: Colors.background.primary,
-    paddingHorizontal:16,
+    paddingHorizontal: 16,
     paddingVertical: 5
   },
 
@@ -36,65 +36,40 @@ export const GlobalStyles = StyleSheet.create({
     color: Colors.icon.primary,
   },
 
-  // Search Bar Styles
-  searchContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: Colors.background.secondary,
-  },
-
-  searchInputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: Colors.background.primary,
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: Colors.border.light,
-  },
-
-  searchIcon: {
-    width: 18,
-    height: 18,
-    marginRight: 8,
-    color: Colors.icon.secondary,
-  },
-
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: Colors.text.primary,
-    padding: 0,
-  },
-
-  searchPlaceholder: {
-    color: Colors.text.secondary,
-  },
 
   // Section Styles
   sectionContainer: {
-    backgroundColor: Colors.background.primary,
-    marginBottom: 1,
+    backgroundColor: Colors.background.secondary,
+    marginBottom: 10,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    shadowColor: Colors.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 0.1,
+    },
+    shadowOpacity: 0.04,
+    shadowRadius: 0.1,
+    elevation: 1,
+
   },
 
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: Colors.background.primary,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: Colors.border.light,
+    backgroundColor: Colors.background.secondary,
+    borderRadius: 10,
+    paddingHorizontal: 10
   },
 
   sectionTitle: {
-    fontSize: 14,
-    fontWeight: '400',
+    fontSize: 16,
+    fontWeight: '500',
     color: Colors.text.secondary,
-    textTransform: 'lowercase',
     letterSpacing: 0.2,
+    paddingVertical: 10
   },
 
   chevronIcon: {
@@ -110,10 +85,19 @@ export const GlobalStyles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 14,
-    backgroundColor: Colors.background.secondary,
+    backgroundColor: Colors.background.primary,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: Colors.border.ultraLight,
-    borderRadius: 10
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    shadowColor: Colors.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 0.1,
+    },
+    shadowOpacity: 0.04,
+    shadowRadius: 0.1,
+    elevation: 1,
   },
 
   serviceItemLast: {
@@ -126,7 +110,7 @@ export const GlobalStyles = StyleSheet.create({
   },
 
   serviceName: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '400',
     color: Colors.text.primary,
     marginBottom: 2,
@@ -147,7 +131,7 @@ export const GlobalStyles = StyleSheet.create({
   },
 
   servicePrice: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '500',
     color: Colors.text.primary,
     marginRight: 20,
@@ -194,14 +178,9 @@ export const GlobalStyles = StyleSheet.create({
 
   // List Container
   listContainer: {
-    backgroundColor: Colors.background.secondary,
-    flex: 1,
-  },
-
-  // Status Bar
-  statusBar: {
     backgroundColor: Colors.background.primary,
-  },
+    flex: 1,
+  }
 });
 
 // Typography Presets
