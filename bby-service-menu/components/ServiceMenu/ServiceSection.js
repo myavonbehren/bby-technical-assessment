@@ -39,8 +39,11 @@ const ServiceSection = ({
           data={services}
           renderItem={renderServiceItem}
           keyExtractor={(item) => item.id.toString()}
-          scrollEnabled={false}  // Prevents nested scrolling
+          scrollEnabled={false}
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            gap: 10
+          }}
         />
       )}
     </View>
