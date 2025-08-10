@@ -1,21 +1,26 @@
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
+import DraggableFlatList from 'react-native-draggable-flatlist';
 import ServiceItem from './ServiceItem';
 import { GlobalStyles } from '../../constants/Styles';
 import Colors from '../../constants/Colors';
+
 
 const ServiceSection = ({ 
   title, 
   services, 
   isExpanded, 
-  onToggle 
+  onToggle,
+  onReorder
 }) => {
-  const renderServiceItem = ({ item, index }) => (
+  const renderServiceItem = ({ item, index, drag, isActive }) => (
     <ServiceItem 
       service={item} 
       isLast={index === services.length - 1}
       onPress={() => {}} 
       onMorePress={() => {}} 
+      onLongPress={drag}
+      isDragging={isActive}
     />
   );
 
@@ -35,7 +40,7 @@ const ServiceSection = ({
       </TouchableOpacity>
       
       {isExpanded && (
-        <FlatList
+        <DraggableFlatList
           data={services}
           renderItem={renderServiceItem}
           keyExtractor={(item) => item.id.toString()}
@@ -44,6 +49,18 @@ const ServiceSection = ({
           contentContainerStyle={{
             gap: 10
           }}
+          onDragEnd={({ data }) => onReorder && onReorder(data)}
+          animationConfig={{
+            spring: {
+              damping: 20,
+              mass: 0.8,
+              stiffness: 300,
+            },
+            timing: {
+              duration: 300,
+            },
+          }}
+          dragItemOverflow={false}
         />
       )}
     </View>
