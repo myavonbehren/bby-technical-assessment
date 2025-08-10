@@ -34,14 +34,6 @@ export const mockServicesData = {
         { id: 34, name: "Upper Lip Wax", duration: 10, price: 15 },
         { id: 35, name: "Full Face Wax", duration: 30, price: 40 }
       ]
-    },
-    packages: {
-      title: "Packages",
-      services: [
-        { id: 41, name: "Everything", duration: 300, price: 150 },
-        { id: 42, name: "Hair & Nails Combo", duration: 150, price: 65 },
-        { id: 43, name: "Bridal Package", duration: 360, price: 250 }
-      ]
     }
   };
   
@@ -53,28 +45,6 @@ export const mockServicesData = {
   // Helper function to get services by category
   export const getServicesByCategory = (categoryKey) => {
     return mockServicesData[categoryKey] || null;
-  };
-  
-  // Helper function to search services by name
-  export const searchServices = (searchTerm) => {
-    if (!searchTerm) return mockServicesData;
-    
-    const filteredData = {};
-    Object.keys(mockServicesData).forEach(categoryKey => {
-      const category = mockServicesData[categoryKey];
-      const filteredServices = category.services.filter(service =>
-        service.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      
-      if (filteredServices.length > 0) {
-        filteredData[categoryKey] = {
-          ...category,
-          services: filteredServices
-        };
-      }
-    });
-    
-    return filteredData;
   };
   
   // Helper function to get service by ID
