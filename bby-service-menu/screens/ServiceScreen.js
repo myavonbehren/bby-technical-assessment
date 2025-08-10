@@ -1,8 +1,11 @@
-import { ScrollView } from "react-native";
-import { useState } from "react";
+// ServiceScreen.js
+import { View } from "react-native";
+import { useState, useEffect } from "react";
+import DraggableFlatList from 'react-native-draggable-flatlist';
 import { mockServicesData } from "../data/mockServices";
 import ServiceSection from "../components/ServiceMenu/ServiceSection";
 import { GlobalStyles } from "../constants/Styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ServiceScreen = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -10,6 +13,45 @@ const ServiceScreen = () => {
     nails: false,
     facial: false,
   });
+  const [servicesData, setServicesData] = useState(mockServicesData);
+  const [sectionOrder, setSectionOrder] = useState(Object.keys(mockServicesData));
+
+  // Load saved order on component mount
+  useEffect(() => {
+    loadServicesOrder();
+  }, []);
+
+  const loadServicesOrder = async () => {
+    try {
+      const savedOrder = await AsyncStorage.getItem('servicesOrder');
+      const savedSectionOrder = await AsyncStorage.getItem('sectionOrder');
+      
+      if (savedOrder) {
+        setServicesData(JSON.parse(savedOrder));
+      }
+      if (savedSectionOrder) {
+        setSectionOrder(JSON.parse(savedSectionOrder));
+      }
+    } catch (error) {
+      console.log('Error loading services order:', error);
+    }
+  };
+
+  const saveServicesOrder = async (newOrder) => {
+    try {
+      await AsyncStorage.setItem('servicesOrder', JSON.stringify(newOrder));
+    } catch (error) {
+      console.log('Error saving services order:', error);
+    }
+  };
+
+  const saveSectionOrder = async (newSectionOrder) => {
+    try {
+      await AsyncStorage.setItem('sectionOrder', JSON.stringify(newSectionOrder));
+    } catch (error) {
+      console.log('Error saving section order:', error);
+    }
+  };
 
   const toggleSection = (sectionKey) => {
     setExpandedSections(prev => ({
@@ -18,18 +60,64 @@ const ServiceScreen = () => {
     }));
   };
 
+  const handleReorderServices = (sectionKey, reorderedServices) => {
+    const newData = {
+      ...servicesData,
+      [sectionKey]: {
+        ...servicesData[sectionKey],
+        services: reorderedServices
+      }
+    };
+    setServicesData(newData);
+    saveServicesOrder(newData);
+  };
+
+  const handleReorderSections = ({ data }) => {
+    const newSectionOrder = data.map(item => item.key);
+    setSectionOrder(newSectionOrder);
+    saveSectionOrder(newSectionOrder);
+  };
+
+  // Prepare data for section-level dragging
+  const sectionData = sectionOrder.map(key => ({
+    key,
+    category: servicesData[key]
+  }));
+
+  const renderSection = ({ item, drag, isActive }) => {
+    const { key, category } = item;
+    
+    return (
+      <ServiceSection
+        key={key}
+        title={category.title}
+        services={category.services}
+        isExpanded={expandedSections[key]}
+        onToggle={() => toggleSection(key)}
+        onReorder={(reorderedServices) => handleReorderServices(key, reorderedServices)}
+        onLongPress={drag}
+        isDragging={isActive}
+      />
+    );
+  };
+
   return (
-    <ScrollView style={GlobalStyles.listContainer}>
-      {Object.entries(mockServicesData).map(([key, category]) => (
-        <ServiceSection
-          key={key}
-          title={category.title}
-          services={category.services}
-          isExpanded={expandedSections[key]}
-          onToggle={() => toggleSection(key)}
-        />
-      ))}
-    </ScrollView>
+    <View style={GlobalStyles.listContainer}>
+      <DraggableFlatList
+        data={sectionData}
+        renderItem={renderSection}
+        keyExtractor={(item) => item.key}
+        onDragEnd={handleReorderSections}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ flexGrow: 1 }}
+        dragItemOverflow={false}
+        animationConfig={{
+          timing: {
+            duration: 300,
+          },
+        }}
+      />
+    </View>
   );
 };
 
