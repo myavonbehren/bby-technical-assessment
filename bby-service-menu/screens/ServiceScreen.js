@@ -101,24 +101,27 @@ const ServiceScreen = () => {
     );
   };
 
-  return (
-    <View style={GlobalStyles.listContainer}>
-      <DraggableFlatList
-        data={sectionData}
-        renderItem={renderSection}
-        keyExtractor={(item) => item.key}
-        onDragEnd={handleReorderSections}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1 }}
-        dragItemOverflow={false}
-        animationConfig={{
-          timing: {
-            duration: 300,
-          },
-        }}
-      />
-    </View>
-  );
+      return (
+      <View style={GlobalStyles.listContainer}>
+        <DraggableFlatList
+          data={sectionData}
+          renderItem={renderSection}
+          keyExtractor={(item) => item.key}
+          onDragEnd={handleReorderSections}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ 
+            flexGrow: 1,
+            minHeight: '100%'
+          }}
+          dragItemOverflow={false}
+          animationConfig={{
+            timing: {
+              duration: 300,
+            },
+          }}
+        />
+      </View>
+    );
 };
 
 export default ServiceScreen;
