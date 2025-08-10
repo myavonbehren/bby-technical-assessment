@@ -8,7 +8,9 @@ const ServiceItem = ({
   service, 
   isLast = false, 
   onPress, 
-  onMorePress 
+  onMorePress,
+  onLongPress,
+  isDragging = false
 }) => {
   const { id, name, duration, price } = service;
 
@@ -16,9 +18,11 @@ const ServiceItem = ({
     <TouchableOpacity
       style={[
         GlobalStyles.serviceItem,
-        isLast && GlobalStyles.serviceItemLast
+        isLast && GlobalStyles.serviceItemLast,
+        isDragging && { opacity: 0.5 }
       ]}
       onPress={() => onPress && onPress(service)}
+      onLongPress={onLongPress}
       activeOpacity={GlobalStyles.touchable.activeOpacity}
     >
 
