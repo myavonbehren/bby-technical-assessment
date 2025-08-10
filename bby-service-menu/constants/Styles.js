@@ -42,8 +42,7 @@ export const GlobalStyles = StyleSheet.create({
     backgroundColor: Colors.background.secondary,
     marginBottom: 10,
     borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    padding: 8,
     shadowColor: Colors.shadow,
     shadowOffset: {
       width: 0,
@@ -51,8 +50,7 @@ export const GlobalStyles = StyleSheet.create({
     },
     shadowOpacity: 0.04,
     shadowRadius: 0.1,
-    elevation: 1,
-
+    elevation: 1
   },
 
   sectionHeader: {
@@ -96,6 +94,7 @@ export const GlobalStyles = StyleSheet.create({
     shadowOpacity: 0.04,
     shadowRadius: 0.1,
     elevation: 1,
+    marginBottom: 10
   },
 
   serviceItemLast: {
@@ -155,13 +154,6 @@ export const GlobalStyles = StyleSheet.create({
     right: 8,
   },
 
-  // Separator
-  separator: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: Colors.border.ultraLight,
-    marginLeft: 16,
-  },
-
   // Shadow (iOS)
   cardShadow: {
     shadowColor: Colors.shadow,
@@ -177,120 +169,6 @@ export const GlobalStyles = StyleSheet.create({
   // List Container
   listContainer: {
     backgroundColor: Colors.background.primary,
-    flex: 1,
+    flex: 1
   }
 });
-
-// Typography Presets
-export const Typography = StyleSheet.create({
-  largeTitle: {
-    fontSize: 34,
-    fontWeight: '700',
-    letterSpacing: -0.8,
-    color: Colors.text.primary,
-  },
-  
-  title1: {
-    fontSize: 28,
-    fontWeight: '700',
-    letterSpacing: -0.6,
-    color: Colors.text.primary,
-  },
-  
-  title2: {
-    fontSize: 22,
-    fontWeight: '700',
-    letterSpacing: -0.4,
-    color: Colors.text.primary,
-  },
-  
-  title3: {
-    fontSize: 20,
-    fontWeight: '600',
-    letterSpacing: -0.4,
-    color: Colors.text.primary,
-  },
-  
-  headline: {
-    fontSize: 17,
-    fontWeight: '600',
-    letterSpacing: -0.4,
-    color: Colors.text.primary,
-  },
-  
-  body: {
-    fontSize: 17,
-    fontWeight: '400',
-    letterSpacing: -0.4,
-    color: Colors.text.primary,
-  },
-  
-  callout: {
-    fontSize: 16,
-    fontWeight: '400',
-    letterSpacing: -0.2,
-    color: Colors.text.primary,
-  },
-  
-  subhead: {
-    fontSize: 15,
-    fontWeight: '400',
-    letterSpacing: -0.2,
-    color: Colors.text.primary,
-  },
-  
-  footnote: {
-    fontSize: 13,
-    fontWeight: '400',
-    letterSpacing: -0.1,
-    color: Colors.text.secondary,
-  },
-  
-  caption1: {
-    fontSize: 12,
-    fontWeight: '400',
-    letterSpacing: 0,
-    color: Colors.text.secondary,
-  },
-  
-  caption2: {
-    fontSize: 11,
-    fontWeight: '400',
-    letterSpacing: 0.1,
-    color: Colors.text.secondary,
-  },
-});
-
-// Layout Constants
-export const Layout = {
-  spacing: {
-    xs: 4,
-    sm: 8,
-    md: 12,
-    lg: 16,
-    xl: 20,
-    xxl: 24,
-  },
-  
-  borderRadius: {
-    sm: 6,
-    md: 8,
-    lg: 10,
-    xl: 12,
-    round: 50,
-  },
-  
-  hitSlop: {
-    top: 8,
-    bottom: 8,
-    left: 8,
-    right: 8,
-  },
-  
-  minTouchTarget: 44,
-  
-  screenPadding: 16,
-  listItemHeight: 56,
-  headerHeight: 44,
-  tabBarHeight: 49,
-};
