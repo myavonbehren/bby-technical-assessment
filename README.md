@@ -1,4 +1,4 @@
-# BBY Technical Assessment.
+# BBY Technical Assessment
 
 A React Native application for managing service menus with drag-and-drop functionality, built with Expo for iOS and Android.
 
