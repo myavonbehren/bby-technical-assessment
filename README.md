@@ -44,9 +44,35 @@ npx expo start
 ## Tradeoffs & Bugs
 - **Mock Data**: Hardcoded service data rather than dynamic API integration
 - **Gesture Conflicts**: Occasional conflicts between section and service dragging on slow devices or online emulators
-- **Scrolling**: Sometimes scrolling can stop if the user accidentally pushes the service item
+- **Scrolling**: Sometimes, scrolling can stop if the user accidentally pushes the service item
 
 ## Improvements
 - **Search Functionality**: Add service search/filtering capability
 - **Animations**: More sophisticated drag animations and transitions
 - **UX**: Add visual indicators (drag handles, haptic feedback) to better communicate drag-and-drop functionality
+
+## Database Schema
+```SQL
+-- Sections table
+CREATE TABLE sections (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title VARCHAR(100) NOT NULL,
+  display_order INTEGER NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Services table
+CREATE TABLE services (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  section_id UUID REFERENCES sections(id) ON DELETE SET NULL,
+  name VARCHAR(200) NOT NULL,
+  description TEXT,
+  price_type ENUM('fixed', 'varies') DEFAULT 'fixed',
+  price_amount DECIMAL(10,2) CHECK (price_amount > 0),
+  duration_minutes INTEGER NOT NULL CHECK (duration_minutes > 0),
+  display_order INTEGER NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+```
